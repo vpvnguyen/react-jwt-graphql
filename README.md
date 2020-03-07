@@ -16,3 +16,7 @@ JWT authentication using Node.js, Typescript, GraphQL, React, and PostgreSQL
 4. Persisting session on refresh
 5. Handling expired tokens
 6. Fetching current user in header
+
+1. npm i -g typeorm
+2. `typeorm init --name server --database postgres`
+> this will create a server using postgres
