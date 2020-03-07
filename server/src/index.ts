@@ -4,6 +4,7 @@ import express from "express";
 import { ApolloServer } from "apollo-server-express";
 import { buildSchema } from "type-graphql";
 import { UserResolver } from "./UserResolver";
+import { createConnection } from "typeorm";
 
 const PORT = 4000;
 
@@ -15,6 +16,9 @@ const PORT = 4000;
   app.get("/", (_req, res) => {
     res.send("hello");
   });
+
+  // pull entities from ormconfig
+  await createConnection();
 
   // define graphql schema
   const apolloServer = new ApolloServer({
