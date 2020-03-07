@@ -11,16 +11,22 @@ export class UserResolver {
 
   //   crate mutation to CRUD with graphql
 
-  @Mutation()
+  @Mutation(() => Boolean)
   async register(
     @Arg("email", () => String) email: string,
     @Arg("password", () => String) password: string
   ) {
     const hashedPassword = await hash(password, 12);
-    await User.insert({
-      email,
-      password: hashedPassword
-    });
-    return;
+
+    try {
+      await User.insert({
+        email,
+        password: hashedPassword
+      });
+    } catch (err) {
+      console.log(err);
+      return false;
+    }
+    return true;
   }
 }
